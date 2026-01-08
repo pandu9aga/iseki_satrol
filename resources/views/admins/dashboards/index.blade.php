@@ -35,9 +35,9 @@
                     <div class="card-header py-3 bg-white">
                         <h6 class="m-0 font-weight-bold" style="color: #e91e63;">Daftar Patrol</h6>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body p-4">
                         <div class="table-responsive">
-                            <table class="table table-borderless mb-0">
+                            <table id="datatable" class="table table-bordered datatable mb-0">
                                 <thead class="bg-light-pink text-pink">
                                     <tr>
                                         <th class="py-3 px-4" style="width: 5%;">No</th>

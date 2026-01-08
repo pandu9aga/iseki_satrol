@@ -9,9 +9,9 @@
                     <i class="fas fa-plus me-1"></i> Tambah User
                 </button>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-4">
                 <div class="table-responsive">
-                    <table id="userTable" class="table table-borderless mb-0" style="font-size: 0.95rem; width: 100%;">
+                    <table id="datatable" class="table table-bordered datatable mb-0" style="font-size: 0.95rem; width: 100%;">
                         <thead class="bg-light-pink text-pink">
                             <tr>
                                 <th class="py-3 px-4">No</th>

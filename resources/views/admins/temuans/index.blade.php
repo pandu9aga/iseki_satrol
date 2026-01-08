@@ -20,16 +20,16 @@
                     </button> --}}
                 </div>
 
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2 mt-3">
                     <a href="{{ route('temuan.exportPPT', $patrol->Id_Patrol) }}" class="btn btn-success">
                         <i class="fas fa-file-powerpoint me-1"></i> Export ke PPT
                     </a>
                     {{-- <button class="btn btn-pink">Tambah Temuan</button> --}}
                 </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-4">
                 <div class="table-responsive">
-                    <table id="example" class="table table-borderless mb-0" style="font-size: 0.95rem; width: 100%;">
+                    <table id="example" class="table table-bordered datatable" style="font-size: 0.95rem; width: 100%;">
                         <thead class="bg-light-pink text-pink">
                             <tr>
                                 <th class="py-3 px-4">No</th>
@@ -235,7 +235,7 @@
             }
 
             var table = $('#example').DataTable({
-                "pageLength": 100,
+                "pageLength": -1,
                 "lengthMenu": [
                     [10, 25, 50, 100, -1],
                     [10, 25, 50, 100, "All"]

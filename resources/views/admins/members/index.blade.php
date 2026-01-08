@@ -7,9 +7,9 @@
                 <h4 class="m-0">Data Member</h4>
                 <!-- Tombol tambah bisa ditambahkan di sini nanti jika perlu -->
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-4">
                 <div class="table-responsive">
-                    <table id="memberTable" class="table table-borderless align-middle"
+                    <table id="datatable" class="table table-bordered datatable align-middle"
                         style="width:100%; font-size: 0.95rem;">
                         <thead class="text-pink bg-light-pink">
                             <tr>

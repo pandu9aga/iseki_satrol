@@ -10,9 +10,9 @@
                     Member: <strong class="text-pink">{{ session('login_name') ?? '-' }}</strong>
                 </p>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-4">
                 <div class="table-responsive">
-                    <table id="patrolTable" class="table table-borderless mb-0" style="font-size: 0.95rem; width: 100%;">
+                    <table id="datatable" class="table table-bordered datatable" style="font-size: 0.95rem; width: 100%;">
                         <thead class="bg-light-pink text-pink">
                             <tr>
                                 <th class="py-3 px-4">No</th>
