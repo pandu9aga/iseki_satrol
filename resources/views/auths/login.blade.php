@@ -277,9 +277,11 @@
 
             Html5Qrcode.getCameras().then(devices => {
                 if (devices && devices.length) {
-                    const cameraId = devices[0].id;
+                    const rearCamera = devices.find(c => /back|rear|environment/i.test(c.label));
+                    const camId = rearCamera ? rearCamera.id : devices[0].id;
+
                     html5QrCode.start(
-                        cameraId, {
+                        camId, {
                             fps: 10,
                             qrbox: {
                                 width: 230,
