@@ -221,15 +221,21 @@
             <div class="form-group">
                 <label for="nikInput">NIK Karyawan</label>
                 <input type="text" id="nikInput" name="nik" class="form-control"
-                    placeholder="Masukkan atau scan NIK">
+                    placeholder="Masukkan NIK">
+            </div>
+            <div class="form-group">
+                <label for="passwordInput">Password</label>
+                <input type="password" id="passwordInput" name="password" class="form-control"
+                    placeholder="Masukkan Password">
             </div>
             <div id="reader"></div>
             <form id="submitMemberForm" method="POST" action="{{ route('login.member') }}" style="display:none;">
                 @csrf
                 <input type="hidden" name="nik" id="hiddenNik">
+                <input type="hidden" name="password" id="hiddenPassword">
             </form>
             <button type="button" class="btn-login" onclick="submitMember()">Masuk sebagai Member</button>
-            <button type="button" class="btn-scan" id="btnScan">📷 Scan Barcode NIK</button>
+            {{-- <button type="button" class="btn-scan" id="btnScan">📷 Scan Barcode NIK</button> --}}
 
         </div>
 
@@ -311,11 +317,17 @@
 
         function submitMember() {
             const nik = document.getElementById('nikInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
             if (!nik) {
                 alert("NIK tidak boleh kosong!");
                 return;
             }
+            if (!password) {
+                alert("Password tidak boleh kosong!");
+                return;
+            }
             document.getElementById('hiddenNik').value = nik;
+            document.getElementById('hiddenPassword').value = password;
             document.getElementById('submitMemberForm').submit();
         }
     </script>
