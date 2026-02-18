@@ -205,6 +205,16 @@ class TemuanController extends Controller
         $temuan->Desc_Update_Temuan = $request->input('Desc_Update_Temuan', $temuan->Desc_Update_Temuan);
         $temuan->save();
 
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Temuan berhasil diperbarui.',
+                'path_update' => $temuan->Path_Update_Temuan,
+                'desc_update' => $temuan->Desc_Update_Temuan,
+                'full_path_update' => $temuan->Path_Update_Temuan ? asset('uploads/' . $temuan->Path_Update_Temuan) : null,
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Temuan berhasil diperbarui.');
     }
 

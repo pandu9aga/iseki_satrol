@@ -68,6 +68,7 @@
                                         <button type="button" class="btn btn-sm btn-outline-success me-1 view-temuan"
                                             data-bs-toggle="modal" data-bs-target="#viewTemuanModal"
                                             data-index="{{ $index }}" data-id="{{ $temuan->Id_Temuan }}"
+                                            data-iteration="{{ $loop->iteration }}"
                                             data-nama-penemu="{{ $temuan->user && $temuan->user->Id_Type_User == 1
                                                 ? $temuan->user->Name_User ?? '-'
                                                 : $temuan->member->nama ?? '-' }}"
@@ -101,10 +102,11 @@
 
     <!-- View Temuan Modal -->
     <div class="modal fade" id="viewTemuanModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl"
+            style="width: 100vw;max-width: none;height: 100%;margin-left: 10px;margin-right: 10px;">
             <div class="modal-content">
                 <div class="modal-header px-5 d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title">Detail Temuan</h5>
+                    <h5 class="modal-title">Detail Temuan <span id="modalIteration" class="text-pink"></span></h5>
                     <div>
                         <button type="button" class="btn btn-outline-primary btn-sm me-2" id="prevTemuan">&laquo;
                             Prev</button>
@@ -140,12 +142,12 @@
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Foto Temuan</label>
+                            <div><label class="form-label">Foto Temuan</label></div>
                             <img id="modalFotoTemuan" src="" alt="Foto Temuan" class="img-fluid rounded"
                                 style="max-height:500px;">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Foto Perbaikan</label>
+                            <div><label class="form-label">Foto Perbaikan</label></div>
                             <img id="modalFotoUpdate" src="" alt="Foto Perbaikan" class="img-fluid rounded"
                                 style="max-height:500px;">
                         </div>
@@ -334,9 +336,72 @@
                 }
             });
 
+            // AJAX submit for update perbaikan
+            updateTemuanForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const formData = new FormData(updateTemuanForm);
+                const actionUrl = updateTemuanForm.action;
+                const submitBtn = updateTemuanForm.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Menyimpan...";
+
+                fetch(actionUrl, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+
+                        // Update modal foto & desc
+                        if (data.full_path_update) {
+                            document.getElementById("modalFotoUpdate").src = data.full_path_update;
+                        }
+                        document.getElementById("modalDescUpdate").textContent = data.desc_update || "-";
+
+                        // Update button data attributes
+                        const btn = document.querySelector(`button[data-id="${statusTemuanId.value}"]`);
+                        if (btn) {
+                            btn.dataset.fotoUpdate = data.path_update || "";
+                            btn.dataset.descUpdate = data.desc_update || "";
+
+                            // Update table row cells
+                            const row = btn.closest("tr");
+                            const cells = row.querySelectorAll("td");
+                            // 0:No 1:Penemu 2:FotoTemuan 3:HasilTemuan 4:FotoPerbaikan 5:HasilPerbaikan 6:Aksi
+                            if (data.full_path_update) {
+                                cells[4].innerHTML = `<img src="${data.full_path_update}" class="img-thumbnail" style="max-height:80px; object-fit: cover;">`;
+                            }
+                            cells[5].textContent = data.desc_update || "";
+                        }
+
+                        // Reset file input
+                        updateTemuanForm.querySelector('input[type="file"]').value = "";
+                    } else {
+                        alert("Gagal update perbaikan");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Error saat update perbaikan");
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Update Perbaikan";
+                });
+            });
+
             function loadTemuanData(btn) {
                 const id = btn.dataset.id;
                 statusTemuanId.value = id;
+
+                // Show row number in modal
+                document.getElementById("modalIteration").textContent = btn.dataset.iteration ? `${btn.dataset.iteration}` : "";
+
                 document.getElementById("modalNamaPenemu").textContent = btn.dataset.namaPenemu || "-";
                 document.getElementById("modalDescTemuan").textContent = btn.dataset.descTemuan || "-";
                 document.getElementById("modalDescUpdate").textContent = btn.dataset.descUpdate || "-";
@@ -350,6 +415,10 @@
 
                 updateTemuanForm.action = `{{ url('temuan') }}/${id}`;
                 statusForm.action = `{{ url('temuan') }}/${id}/status`;
+
+                // Reset form fields
+                updateTemuanForm.querySelector('input[type="file"]').value = "";
+                updateTemuanForm.querySelector('textarea[name="Desc_Update_Temuan"]').value = "";
             }
         });
     </script>

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Satrol Admin</title>
+    <title>Safety Patrol</title>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/favicon.png') }}">
 
@@ -20,7 +20,8 @@
 
     <!-- Custom fonts & template CSS -->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet"> --}}
+    {{--
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet"> --}}
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <style>
@@ -144,7 +145,7 @@
         <ul class="navbar-nav bg-soft-pink sidebar sidebar-light accordion toggled" id="accordionSidebar">
             <!-- Sidebar Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-                <div class="sidebar-brand-text mx-3">Iseki_Satrol Admin</div>
+                <div class="sidebar-brand-text mx-3">Safety Patrol</div>
             </a>
 
             <hr class="sidebar-divider my-0">
@@ -160,7 +161,8 @@
             <li class="nav-item"><a class="nav-link" href="{{ route('patrol') }}"><i
                         class="fas fa-fw fa-table"></i><span>Patrol</span></a></li>
             <hr class="sidebar-divider my-0">
-            {{-- <li class="nav-item"><a class="nav-link" href="{{ route('temuan') }}"><i class="fas fa-fw fa-folder"></i><span>Temuan</span></a></li> --}}
+            {{-- <li class="nav-item"><a class="nav-link" href="{{ route('temuan') }}"><i
+                        class="fas fa-fw fa-folder"></i><span>Temuan</span></a></li> --}}
             <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}"><i
                         class="fas fa-fw fa-sign-out-alt"></i><span>Log Out</span></a></li>
             <hr class="sidebar-divider d-none d-md-block">
@@ -191,11 +193,16 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>Profile</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>Settings</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>Activity Log</a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>Profile</a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>Settings</a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>Activity Log</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>Logout</a>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#logoutModal"><i
+                                        class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>Logout</a>
                             </div> --}}
                         </li>
                     </ul>
@@ -212,7 +219,9 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Iseki 2025</span>
+                        <span>Copyright &copy; Iseki
+                            <script>document.write(new Date().getFullYear())</script>
+                        </span>
                     </div>
                 </div>
             </footer>
@@ -254,7 +263,7 @@
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.datatable').DataTable({
                 paging: true,
                 searching: true,
@@ -274,7 +283,7 @@
             });
 
             // Sidebar toggle
-            $('#sidebarToggle, #sidebarToggleTop').on('click', function() {
+            $('#sidebarToggle, #sidebarToggleTop').on('click', function () {
                 $('#accordionSidebar').toggleClass('active');
             });
         });

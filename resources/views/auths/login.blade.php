@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | Patrol System</title>
+    <title>Safety Patrol</title>
     <link rel="icon" href="{{ asset('assets/favicon.png') }}">
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"> --}}
+    {{--
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"> --}}
     <script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
 
     <style>
@@ -220,8 +221,7 @@
         <div id="formMember" class="form-section active">
             <div class="form-group">
                 <label for="nikInput">NIK Karyawan</label>
-                <input type="text" id="nikInput" name="nik" class="form-control"
-                    placeholder="Masukkan NIK">
+                <input type="text" id="nikInput" name="nik" class="form-control" placeholder="Masukkan NIK">
             </div>
             <div class="form-group">
                 <label for="passwordInput">Password</label>
@@ -288,18 +288,18 @@
 
                     html5QrCode.start(
                         camId, {
-                            fps: 10,
-                            qrbox: {
-                                width: 230,
-                                height: 230
-                            }
-                        },
+                        fps: 10,
+                        qrbox: {
+                            width: 230,
+                            height: 230
+                        }
+                    },
                         (decodedText) => {
                             document.getElementById('nikInput').value = decodedText;
                             stopScanner();
                             reader.style.display = 'none';
                         },
-                        (errorMessage) => {}
+                        (errorMessage) => { }
                     );
                 }
             }).catch(err => {
